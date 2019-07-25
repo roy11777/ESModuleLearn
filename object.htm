@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>物件引用</title>
+</head>
+
+<body>
+    <script>
+        // 基本型別(string、number、boolean、null、undefined)
+        var a = 10;
+        var b = 10;
+
+        // 在 JavaScript 判斷是否「相等」用 " === "
+        // 後續提到運算子會詳細介紹。
+
+        console.log(a === b);      // true
+
+
+        var a = 'Kuro';
+        var b = 'Kuro';
+        var c = 'Jack';
+
+        console.log(a === b);      // true
+        console.log(a === c);      // false
+        // -----------------------------
+        var obj1 = { value: 10 };
+        var obj2 = { value: 10 };
+        // 因為物件型別是兩個不同的實體位置因此會回傳false
+        console.log(obj1 === obj2);      // false
+
+
+
+
+
+        // 基本型別是複製值，因此如果i=100,J還會是10
+        var i = 10;
+        var j = i;
+
+        console.log(i);   // 10
+        console.log(j);   // 10
+        i = 100;
+        console.log(i);   // 100
+        console.log(j);   // 10
+
+
+        // 物件是傳址
+        var o1 = {};
+        var o2 = o1;
+        // 此種方式會變成o1與o2為同一個實體，造成其中一個變量變了後期他也跟著變了
+
+        o1.a = 1;
+        console.log(o2.a) // 1
+
+        o2.b = 2;
+        console.log(o1.b) // 2
+        // 不同對象指向同一變量，代表使用相同的地址，因此變更其中內容也會影響到其他所有變量
+        // 因此即使o1.b也會變成2
+        // o1也變成{a: 1, b: 2}
+        // 同理如果o2.a=2，o1={a: 2, b: 2}
+
+
+        // 假設取消其中一個變量的引用，則不會影響到另一個變數，因為已經紙量不同位置
+        o1 = 1;
+        console.log(o1)
+        console.log(o2) //{a: 2, b: 2}
+    </script>
+</body>
+
+</html>
