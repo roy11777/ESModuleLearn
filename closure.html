@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>閉包</title>
+</head>
+
+<body>
+    <script>
+
+        function f1() {
+            var n = 999;
+        }
+        // 因為n自f1裡宣告，因此外部是抓不到裡面的N所以undefined
+        // console.log(n)
+        // Uncaught ReferenceError: n is not defined
+
+
+        // 利用此特性可以封裝私有屬性
+        function Person(name) {
+            var _age;
+            function setAge(n) {
+                _age = n;
+            }
+            function getAge() {
+                return _age;
+            }
+            function setgender(m) {
+                _gender = m;
+            }
+            function getgender(m) {
+                return _gender;
+            }
+
+            return {
+                name: name,
+                getAge: getAge,
+                setAge: setAge,
+                setgender: setgender,
+                getgender: getgender
+            };
+        }
+
+        var p1 = Person("張三");
+        // var p1 = Person();也可不給參數，只是return的name會是undefined
+        p1.setgender("male");
+        p1.getgender();//"male"
+        p1.setAge(25);
+        p1.getAge() // 25
+        console.log(p1.getAge())
+        console.log(p1.getgender())
+        console.log(p1.name)
+
+    </script>
+</body>
+
+</html>
