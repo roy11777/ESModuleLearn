@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>函式作用域</title>
 </head>
+
 <body>
-    
+    <script>
+        var a = 1;
+        var x = function () {
+            console.log(a);
+        };
+
+        function f() {
+            var a = 2;
+            x();
+        }
+
+        f() // 1
+        // 因為函式作用區是在其聲明所在區域，跟調用的地方無關，因此x()所取用的a是原始宣告的1
+    </script>
 </body>
+
 </html>
