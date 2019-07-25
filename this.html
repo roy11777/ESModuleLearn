@@ -10,6 +10,43 @@
 
 <body>
     <script>
+        var person = {
+            name: 'Jive',
+            describe: function () {
+                return 'Name: ' + this.name;
+            }
+        };
+        person.describe()
+        console.log(this)
+        console.log(person.describe())
+        // "Name: Jive"
+
+
+        var b = {
+            name: "john"
+        }
+        b.describe = person.describe
+        console.log(b.name)//john
+        // 因為this被重新指向b，因此this是指向b，所以回傳john
+
+
+
+        // 模組化的寫法
+        function f() {
+            return "姓名" + this.name
+        }
+        // 寫成函式後用來調用
+        var d = {
+            name: "john",
+            describe: f
+        }
+        var e = {
+            name: "vivi",
+            describe: f
+        }
+        console.log(d.describe())
+        console.log(e.describe())
+
     </script>
 </body>
 
