@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函式變數提升</title>
+</head>
+
+<body>
+    <script>
+
+        var x = 100;
+        function foo() {
+            console.log(x);
+            var x = 0;
+         
+        }
+        // 因為變數提升所以解析後的函示會變成如下
+        // function foo() {
+        //     var x ;
+        //     console.log(x);
+        //     x = 0;
+        // }
+        // 函式中有找到x，所以不會往全域找，但因為變量提升造成undefined
+        // 將console.log(x往後擺在x=0後就會得到0的值)
+        foo();// undefined
+
+        console.log(x);
+        // 此數只會到全域的100
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>scope</title>
+</head>
+
+<body>
+
+    <script>
+        var v = 1;
+
+        function f() {
+            var v = 2;
+            console.log(v);
+        }
+
+        f() // 2
+        // 在f作用域裡有v因此會回傳2
+
+        console.log(v) // 1
+        // 全域的v只會在外面找不會找到f裡面因此回傳1
+    </script>
+
+</body>
+
+</html>
