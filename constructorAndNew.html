@@ -10,10 +10,63 @@
 
 <body>
     <script>
+        // 先建立一個模板通常第一個字大寫
         var Vehicle = function () {
             this.price = 1000;
         };
-        console.log(Vehicle.price)
+        console.log(Vehicle)
+
+        // 將Vehicle透過new 實體化在car 並繼承了Vehicle的key也就是price
+        // var car = new Vehicle();
+        // new本身就有執行函數的功能，因此不給()也相同效益
+
+        var car = new Vehicle;
+        console.log(car)
+        console.log(car.price)
+
+        // NEW命令原理
+        // 创建一个空对象(car)，作为将要返回的对象实例(new) 将这个空对象的原型，指向构造函数的prototype属性(Vehicle) 将这个空对象赋值给函数内部的this关键字(price) 开始执行构造函数内部的代码
+
+
+        var Vehicle3 = function () {
+            this.price2 = 900;
+        };
+
+        var car3 = Vehicle3();
+        // 如果沒有加上new3的話car會變undefned且price會變成全域變數
+
+        console.log(car3)
+        // console.log(car3.price2)
+        console.log(price2)
+
+
+
+        // 當然建構函式也可以接參數如下
+        var Vehicle2 = function (p1, p2) {
+            this.upprice = p1;
+            this.lowprice = p2;
+        };
+        // 在new的當下給入參數
+        var car2 = new Vehicle2(700, 800)
+        // 也可不給參數只是會undefined
+        // var car2 = new Vehicle2
+
+        console.log(car2.upprice)
+
+
+
+        // 如為避免忘了加new可以機上use strict
+        function Fubar(foo, bar) {
+            'use strict';
+            this._foo = foo;
+            this._bar = bar;
+        }
+
+        // console.log(Fubar())   /
+        // TypeError: Cannot set property '_foo' of undefined
+
+        console.log(new Fubar(1, 2))
+
 
     </script>
 </body>
