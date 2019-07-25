@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>變量提升</title>
 </head>
+
 <body>
-    new
+    <script>
+        console.log(a);
+        // 此時a變數還未宣告，因此會undefined並解析成下面的樣子
+        var a = 1;
+
+        // 如下，a變數被宣告並提升，因是用下面方式解析，所以不會抱錯，但是因為a還未給值
+        // 所以結果出來會是undefined
+        // var a;
+        // console.log(a);
+        // a = 1;
+    </script>
 </body>
+
 </html>
