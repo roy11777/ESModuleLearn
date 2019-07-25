@@ -21,9 +21,11 @@
 
         var cat1 = new Cat('大毛', '白色');
         var cat2 = new Cat('二毛', '黑色');
-
-        cat1.meow === cat2.meow
-// false
+        console.log(cat1.meow)
+        console.log(cat2.meow)
+        // 因為創建出來的實體位置都是不同的，所有實體化的位置都會產生對應的屬性
+        // ，因此下列會是false
+        console.log(cat1.meow === cat2.meow)  // false
     </script>
 </body>
 
