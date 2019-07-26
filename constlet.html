@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6</title>
+</head>
+
+<body>
+    <script>
+        let x = 'outer scope';
+
+        (function () {
+            console.log(x)
+            let x = 'inner scope' //多加這行程式碼，這行被提升到函式區塊中的最上面一行
+            // 這樣寫跟VAR不同會有錯，因為暫時還不會上升
+        }())
+    </script>
+</body>
+
+</html>

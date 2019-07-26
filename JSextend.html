@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>繼承</title>
+</head>
+
+<body>
+    <script>
+        class Point {
+            constructor(x, y) {
+                this.x = x
+                this.y = y
+            }
+            toString() {
+                return '(' + this.x + ', ' + this.y + ')';
+            }
+        }
+
+        class ColorPoint extends Point {
+            constructor(x, y, color) {
+                // 繼承要在第一行加super()
+                super(x, y)
+                this.color = color
+            }
+            toString() {
+                // super也可以用於指向上層父母類別，呼叫其中的方法或存取屬性。
+                return super.toString() + ' in ' + this.color
+            }
+        }
+
+        const op1 = new Point(1, 2)
+        const op2 = new ColorPoint(3, 3, "yellow")
+        console.log(op2.toString())
+    </script>
+</body>
+
+</html>
