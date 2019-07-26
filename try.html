@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>data demo</title>
+    <style>
+        div {
+            margin: 5px;
+            background: yellow;
+        }
+
+        button {
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        p {
+            margin: 5px;
+            color: blue;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+
+    <div>A div</div>
+    <button>Get "blah" from the div</button>
+    <button>Set "blah" to "hello"</button>
+    <button>Set "blah" to 86</button>
+    <button>Remove "blah" from the div</button>
+    <p>The "blah" value of this div is <span>?</span></p>
+
+    <script>
+        const Message = function (text) {
+            this.text = text;
+        }
+        // Throws "TypeError: Message is not a constructor"
+        const helloMessage = new Message('Hello World!');
+        console.log(helloMessage)
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="myButton">123</button>
+    <script>
+        function MyCat(name) {
+            this.catName = name
+        }
+
+        // 不可用箭頭函式否則會undefined
+        // MyCat.prototype.sayCatName = () => {
+        MyCat.prototype.sayCatName = function () {
+            return this.catName
+        }
+
+        cat = new MyCat('Mew')
+        // ReferenceError: cat is not defined if use arrow function
+
+        console.log(cat.sayCatName())
+
+
+
+        const button = document.getElementById('myButton')
+
+        // 箭頭函式指著this是windows物件，因此不能用箭頭函式寫
+        // button.addEventListener('click', () => {
+        button.addEventListener('click', function () {
+            this.innerHTML = 'Clicked button'
+        })
+    </script>
+</body>
+
+</html>

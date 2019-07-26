@@ -47,6 +47,237 @@
         console.log(d.describe())
         console.log(e.describe())
 
+
+
+        var objj = function (p) {
+            this.p = p
+        }
+        objj.prototype.m = function () {
+            return this.p
+        }
+        var newobj = new objj("hihi")
+
+        // 因為兩個都指向相同的建構函式，因此都匯回傳hihi
+        console.log(newobj.p)
+        console.log(newobj.m())
+
+
+
+
+        var obj = {
+            foo: function () {
+                console.log(this);
+            }
+        };
+
+        obj.foo() // obj 指向foo
+
+
+        var o = {
+            // 如果這樣寫f2的this會導向windows，因此要換一個寫法
+            // f1: function () {
+            //     console.log(this);
+            //     var f2 = function () {
+            //         console.log(this);
+            //     }();
+            // }
+            f1: function () {
+                console.log(this);
+                // 將裡面的this拉出來設成變數指向f1
+                var self = this;
+                var f2 = function () {
+                    console.log(self);
+                }();
+            }
+        }
+        o.f1()//兩個console.log都指向f1
+        // 在外層將要指定的相同this設成變量，裡面深層也能調用，即可統一this指向
+
+        // 相同舉例如果沒有將this指向counter則inc裡直接寫this.count會undefined，因此將設ss指向counter
+        var counter = {
+            count: 0
+
+        };
+        var ss = counter
+        counter.inc = function () {
+            'use strict';
+            ss.count++
+            console.log(ss)
+        };
+        var f = counter.inc;
+        f()
+
+
+
+        // 用call將this轉向
+        var obj3 = {};
+        var f1 = function () {
+            return this;
+        };
+
+        console.log(f1() === window);
+        console.log(f1.call(obj3));//{}
+        console.log(f.call(obj) === obj); //true
+
+        // Call特性指向空 null undefined的就會是指向全ˋ域，所以前三個都回傳123
+        var n = 123;
+        var obj = { n: 456 };
+
+        function a() {
+            console.log(this.n);
+        }
+
+        a.call() // 123
+        a.call(null) // 123
+        a.call(undefined) // 123
+        a.call(window) // 123
+        // 指向obj裡的n
+        a.call(obj) // 456
+
+
+        function add(a, b) {
+            return a + b;
+        }
+        console.log(add.call(this, 1, 2)) // 3
+        // apply塞一組數如陣列
+        console.log(add.apply(this, [1, 2])) // 3
+
+
+
+
+
+
+        // bind後會返還 一個新的函式
+        // 如果bind方法的第一个参数是null或undefined，等于将this绑定到全局对象，函数运行时this指向顶层对象（在浏览器中为window）。
+        var counter = {
+            count: 0,
+            inc: function () {
+                this.count++;
+            }
+        };
+        // 將counter.inc的this指向counter否則會指向WINDOW
+        var func = counter.inc.bind(counter);
+        func();
+        console.log(counter.count);// 1
+
+
+
+
+
+        var counter = {
+            count: 0,
+            inc: function () {
+                this.count++;
+            }
+        };
+
+        var obj = {
+            count: 100
+        };
+
+        var func = counter.inc.bind(obj);
+        func();
+        console.log(obj.count);// 這邊應該是101，因為this調用指向了obj裡面的count
+
+
+
+
+        var add = function (x, y) {
+            return x * this.m + y * this.n
+        }
+
+        var obj = {
+            m: 3,
+            n: 4
+        }
+        // 先給了第一個參數x=9
+        var newAdd = add.bind(obj, 9)
+        // 再給第二個參數y=7
+        console.log(newAdd(7))//9*3+7*4=55
+
+
+
+        var counter = {
+            count: 0,
+            inc: function () {
+                'use strict';
+                this.count++;
+            }
+        };
+
+        function callIt(callback) {
+            callback();
+        }
+
+        // 此處this指向WINDOW因此CallIt執行找不到count出問題
+        // callIt(counter.inc)
+        // TypeError: Cannot read property 'count' of undefined
+        // 使用bind方式
+        callIt(counter.inc.bind(counter))
+        console.log(counter.count)//1
+
+
+
+        var obj = {
+            name: 'Jive',
+            times: [1, 2, 3],
+            print: function () {
+
+                // 變數方式
+                // var self = this;
+                // 這上下的this都指向obj
+                // this.times.forEach(function (n) {
+                //     // 此處得this會變成全域因此抓不到obj裡面的name
+                //     // console.log(this.name);
+                //     // console.log(this === window);
+                //     // ''
+                //     // true
+                //     // ''
+                //     // true
+                //     // ''
+                //     // true
+
+                //     // 用變數命名引用進來就可以正常顯示name=jive
+                //     console.log(self.name);
+                //     console.log(self === window);
+                // });
+
+                // 或是用bind方式
+                this.times.forEach(function (n) {
+                    console.log(this.name);
+                    console.log(this === window);
+                }.bind(this));
+            }
+        };
+
+        obj.print()
+
+
+
+
+        // 練結式呼叫函式
+        var obj = {
+            namename: 'Jive',
+            times: [1, 2, 3],
+            print: function () {
+                this.times.forEach(function (n) {
+                    console.log(this.namename);
+                }.bind(this));
+                return this;
+            },
+            count: function () {
+                console.log('this is count');
+                return this;
+            },
+            append: function () {
+                console.log('this is append');
+                return this;
+            }
+        };
+
+        // 要加return才能鏈結方式
+        obj.print().count().append();
+
     </script>
 </body>
 

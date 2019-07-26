@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>箭頭函式</title>
+</head>
+
+<body>
+    <script>
+        const funcA = x => x + 1
+        // 如果有家花括號要加return不然會undefined
+        const funcB = x => { return x + 1 }
+
+        console.log(funcA(1))  //2
+        console.log(funcB(1))  //2
+
+
+
+
+        // 箭頭函式可以綁定this下列為傳統寫法先命名變數this
+        const obj = { a: 1 }
+
+        function func() {
+            // const that = this
+            // console.log(this)
+            // setTimeout(
+            //     function () {
+            //         console.log(that)
+            //     },
+            //     2000
+            // )
+
+            // 箭頭函式寫法可以省去上面命名方式，直接就可使用this
+            setTimeout(
+                () => {
+                    console.log(this)
+                },
+                2000
+            )
+        }
+        func.call(obj) //Object {a: 1}
+
+
+
+        // 兩個console都會指向f1
+        var o = {
+            f1: function () {
+                console.log(this);
+
+                // 將內部的函式寫成箭頭
+                // var f2 = function () {
+                var f2 = () => {
+                    console.log(this);
+                };
+                f2();
+            }
+        }
+
+        o.f1()
+
+
+
+        // bind寫法也可用箭頭取代
+        function add(x, y) {
+            return x + y
+        }
+
+        // const plus1 = add.bind(undefined, 1)
+        const plus1 = y => add(1, y)
+
+        console.log(plus1)
+
+
+
+        const calculate = {
+            array: [1, 2, 3],
+            // 不可用箭頭函式寫
+            // sum: () => {
+            sum: function () {
+                // 將陣列加總左至右
+                return this.array.reduce((result, item) => result + item)
+            }
+
+            // (result, item) => result + item加總帶入參數的固定寫法
+        }
+
+        console.log(calculate.sum())
+
+
+
+        // 建構函式不要用箭頭函式寫
+        const Message = (text) => {
+            this.text = text;
+        }
+        // Throws "TypeError: Message is not a constructor"
+        const helloMessage = new Message('Hello World!');
+
+
+        // 事件偵聽也不要用箭頭函式寫
+        const button = document.getElementById('myButton')
+        button.addEventListener('click', () => {
+            this.innerHTML = 'Clicked button'
+        })
+//TypeError: Cannot set property 'innerHTML' of undefined
+    </script>
+</body>
+
+</html>

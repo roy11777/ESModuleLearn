@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>class</title>
+</head>
+
+<body>
+    <script>
+        // ES5以前是用建構函式再實體化，ES6用class方式
+        class Player {
+            constructor(fullName, age, gender, hairColor) {
+                this.fullName = fullName
+                this.age = age
+                this.gender = gender
+                this.hairColor = hairColor
+            }
+
+            toString() {
+                return 'Name: ' + this.fullName + ', Age:' + this.age
+            }
+        }
+
+        const inori = new Player('Inori', 16, 'girl', 'pink')
+        console.log(inori.toString())
+        console.log(inori.fullName)
+
+        const tsugumi = new Player('Tsugumi', 14, 'girl', 'purple')
+        console.log(tsugumi.toString())
+    </script>
+</body>
+
+</html>
