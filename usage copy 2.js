@@ -4,23 +4,28 @@
 	</a>
 </div> */}
 
+
+
+
+
 (function ($) {
 	'use strict';
+	// 名稱
 	var ModuleName = 'banner';
-
+	// 類別
 	var Module = function (ele, options) {
 		this.ele = ele;
 		this.$ele = $(ele);
 		this.option = options;
 	};
-
+	// 預設
 	Module.DEFAULTS = {
 		style: 'classname',
 		whenClickCallback: function () {
 			console.log('whenClickCallback');
 		}
 	};
-
+	// Function
 	Module.prototype.toggle = function () {
 		console.log('999');
 	}; xx
@@ -33,12 +38,14 @@
 		console.log('333777W');
 	};
 
+	// 街口
 	$.fn[ModuleName] = function (methods, options) {
 		return this.each(function () {
 			var $this = $(this);
 			var module = $this.data(ModuleName);
 			console.log(!!module)
 			var opts = null;
+			// 第二次狀態
 			if (!!module) {
 				if (typeof methods === 'string' && typeof options === 'undefined') {
 					module[methods]();
@@ -49,6 +56,8 @@
 					throw 'unsupported options!';
 				}
 			} else {
+
+				// 第一次狀態
 				opts = $.extend({}, Module.DEFAULTS, (typeof methods === 'object' && options), (typeof options === 'object' && options));
 				module = new Module(this, opts);
 				$this.data(ModuleName, module);
